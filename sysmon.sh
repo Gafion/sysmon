@@ -35,8 +35,9 @@ show_cpu() {
 
   # Top 5 CPU consuming processes
   echo "Top 5 CPU Consumers:"
-  ps aux --sort=%cpu | head -6 | tail -5 | awk '{printf " %-8s %6.1f%% %s\n", $1, $3, $11}'
+  ps -eo user,%cpu,cmd --sort=-%cpu | awk 'NR==1 {next} NR<=6 {printf "  %-8s %6.1f%% %s\n", $1, $2, $3}'
   echo ""
+
 }
 
 # Funciton: Display memory usage
