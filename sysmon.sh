@@ -56,8 +56,8 @@ show_memory() {
   local used=$(echo $mem_info | awk '{print $3}')
   local free=$(echo $mem_info | awk '{print $4}')
 
-  total_num=${total//Gi/}
-  used_num=${used//Gi/}
+  total_num=${total//[^0-9.]/}
+  used_num=${used//[^0-9.]/}
   local percent=$(awk "BEGIN {printf \"%.1f\", ($used_num / $total_num) * 100}")
 
   local total_h=$(numfmt --to=iec-i --suffix=B $total 2>/dev/null || echo "${total}B")
