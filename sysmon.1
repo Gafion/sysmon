@@ -1,0 +1,76 @@
+.TH SYSMON 1 "January 2026" "sysmon 1.0" "User Commands"
+.SH NAME
+sysmon \- lightweight system resource monitor
+.SH SYNOPSIS
+.B sysmon.sh
+.RI [ OPTIONS ]
+.SH DESCRIPTION
+.B sysmon
+is a Bash script that displays real-time system usage including CPU, memory, and disk statistics. It can run in single-shot more or continuous monitoring mode.
+.SH OPTIONS
+.TP
+.BR \-c", " \-\-cpu 
+Display CPU usage percentage and top 5 CPU-consuming processes.
+.TP 
+.BR \-m ", " \-\-memory 
+Display memory usage (total, used, free) and top 5 memory-consuming processes.
+.TP 
+.BR \-d ", " \-\-disk 
+Display disk usage for all mounted filesystems with capacity breakdown.
+.TP
+.BR \-a ", " \-\-all 
+Display all metrics: CPU, memory and disk usage combined.
+.TP 
+.BR \-w ", " \-\-watch 
+Enable continuous monitoring mode. Refreshes every SECONDS (must be a positive interger). Press Ctrl+c to exit.
+.TP 
+.BR \-h ", " \-\-help 
+Display help message and usage examples.
+.SH EXAMPLES 
+.TP 
+Show CPU usage:
+.B sysmon.sh -c 
+.TP 
+Show memory usage:
+.B sysmon.sh -m 
+.TP 
+Show all metrics once:
+.B sysmon.sh -a
+.TP 
+Monitor all metrics every 3 seconds:
+.B sysmon.sh -a -w 3
+.TP 
+Show CPU and memory (no disk): 
+.B sysmon.sh -c -m 
+.TP 
+Monitor disk usage every 10 seconds:
+.B sysmon.sh -d -w 10
+.SH ERROR HANDLING
+.B sysmon
+will exit with error code 1 if:
+.IP \(bu 2
+No options are specified
+.IP \(bu 2
+Invalid watch interval (non-numeric or zero/negative)
+.IP \(bu 2
+Unkonw option provided
+.IP \(bu 2
+System commands (top, free, df) are unavailable
+.SH DEPENDENCIES
+Requires standard Unix tools:
+.IP \(bu 2
+.B top
+(for CPU and process information)
+.IP \(bu 2
+.B free
+(for memory statistics)
+.IP \(bu 2
+.B ps 
+(for process listings)
+.IP \(bu 2
+.B df 
+(for disk usage)
+.SH AUTHOR
+Written for Bash system Administration.
+.SH LICENSE
+MIT
